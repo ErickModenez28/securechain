@@ -8,9 +8,9 @@ sudo useradd -m -s /bin/bash analista
 sudo useradd -m -s /bin/bash visitante
 
 # Define uma senha padrão para os testes do professor (securechain123)
-echo "administrador:securechain123" | sudo chpasswd
-echo "analista:securechain123" | sudo chpasswd
-echo "visitante:securechain123" | sudo chpasswd
+echo "administrador:Securechain123@!" | sudo chpasswd
+echo "analista:Securechain123@!" | sudo chpasswd
+echo "visitante:Securechain123@!" | sudo chpasswd
 
 echo "Aplicando as permissoes nos diretorios..."
 
