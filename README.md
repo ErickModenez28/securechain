@@ -1,7 +1,6 @@
-# SecureChain Audit - Plataforma de Auditoria Baseada em Blockchain
+# Prova Prática - SecureChain Audit - Plataforma de Auditoria Baseada em Blockchain
 
-Este repositório contém o desenvolvimento prático da plataforma **SecureChain Audit**, um sistema integrado de segurança, criptografia e auditoria contínua projetado para ambiente Linux Debian 13.
-
+Nome : Erick Domingos Modenez - RA : 201710299 
 ---
 
 ## 1. Gerenciamento de Identidades e Controle de Acesso (RF01)
