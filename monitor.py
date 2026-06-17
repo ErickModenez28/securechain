@@ -6,6 +6,19 @@ from datetime import datetime
 
 DIR_DOCUMENTOS = 'documentos'
 ARQUIVO_ESTADO = 'documentos/estado_hashes.json'
+# Novo caminho para o relatório de auditoria
+ARQUIVO_LOG = "auditoria/relatorios/relatorio_de_auditoria_atual.txt"
+
+def registrar_alerta(mensagem):
+    """Grava o alerta tanto no terminal quanto no arquivo de log."""
+    # Garante que o diretório de relatórios exista
+    os.makedirs(os.path.dirname(ARQUIVO_LOG), exist_ok=True)
+    
+    msg_formatada = f"[{datetime.now().isoformat()}] {mensagem}"
+    print(msg_formatada)
+    
+    with open(ARQUIVO_LOG, 'a') as f:
+        f.write(msg_formatada + "\n")
 
 def calcular_hash(caminho_arquivo):
     """Calcula o hash SHA-256 de um arquivo em blocos."""
@@ -55,26 +68,29 @@ def verificar_integridade():
 
     for caminho, hash_salvo in estado_salvo.items():
         if caminho not in estado_atual:
-            print(f"[ALERTA CRÍTICO] Arquivo EXCLUÍDO: {caminho}")
+            registrar_alerta(f"[ALERTA CRÍTICO] Arquivo EXCLUÍDO: {caminho}")
             inconsistencias = True
         elif estado_atual[caminho] != hash_salvo:
-            print(f"[ALERTA CRÍTICO] Arquivo ALTERADO: {caminho}")
+            registrar_alerta(f"[ALERTA CRÍTICO] Arquivo ALTERADO: {caminho}")
             inconsistencias = True
 
     for caminho in estado_atual:
         if caminho not in estado_salvo:
-            print(f"[ALERTA CRÍTICO] Arquivo INCLUÍDO: {caminho}")
+            registrar_alerta(f"[ALERTA CRÍTICO] Arquivo INCLUÍDO: {caminho}")
             inconsistencias = True
 
     if not inconsistencias:
         print(f"[{datetime.now().isoformat()}] Integridade OK: Nenhuma anomalia detectada.")
     else:
+        # Atualiza a baseline após detectar alterações
         with open(ARQUIVO_ESTADO, 'w') as f:
             json.dump(estado_atual, f, indent=4)
 
 if __name__ == "__main__":
     print("--- SecureChain Audit: Monitoramento de Integridade ---")
     
+    # Prepara o ambiente de teste
+    if not os.path.exists(DIR_DOCUMENTOS): os.makedirs(DIR_DOCUMENTOS)
     arquivo_teste = os.path.join(DIR_DOCUMENTOS, "contrato_base.txt")
     with open(arquivo_teste, "w") as f:
         f.write("Informacao sigilosa original.")
