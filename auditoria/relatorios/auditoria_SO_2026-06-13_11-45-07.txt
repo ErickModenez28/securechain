@@ -1,0 +1,59 @@
+RELATÓRIO DE AUDITORIA DO SISTEMA - 2026-06-13_11-45-07
+=======================================================
+
+=== 1. Usuários Conectados Atualmente (who) ===
+erick    seat0        2026-06-13 09:49 (:0)
+
+=== 2. Histórico de Logins (last) ===
+lightdm  tty8         :1               Sat Jun 13 11:19 - 11:19  (00:00)
+lightdm  tty8         :1               Sat Jun 13 11:01 - 11:07  (00:05)
+erick    tty7         :0               Sat Jun 13 09:49 - still logged in
+lightdm  tty7         :0               Sat Jun 13 09:49 - 09:49  (00:00)
+reboot   system boot  6.12.86+deb13-am Sat Jun 13 09:49 - still running
+erick                                  Sat May  9 12:30 - crash 
+erick    tty7         :0               Sat May  9 12:25 - crash 
+lightdm  tty7         :0               Sat May  9 12:25 - 12:25  (00:00)
+reboot   system boot  6.12.73+deb13-am Sat May  9 12:24 - crash 
+lightdm  tty8         :1               Sat Apr 18 17:06 - crash 
+lightdm  tty8         :1               Sat Apr 18 15:49 - 15:50  (00:01)
+erick    tty7         :0               Sat Apr 18 15:36 - crash 
+lightdm  tty7         :0               Sat Apr 18 15:36 - 15:36  (00:00)
+reboot   system boot  6.12.73+deb13-am Sat Apr 18 15:36 - crash 
+lightdm  tty8         :1               Sat Apr 11 16:00 - crash 
+
+wtmpdb begins Sat Apr 11 16:00:06 2026
+
+=== 3. Portas e Serviços em Escuta (ss -tulpn) ===
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                                                                                                                                             
+udp   UNCONN 0      0            0.0.0.0:5353       0.0.0.0:*    users:(("avahi-daemon",pid=640,fd=12))                                                                                                                             
+udp   UNCONN 0      0            0.0.0.0:58006      0.0.0.0:*    users:(("avahi-daemon",pid=640,fd=14))                                                                                                                             
+udp   UNCONN 0      0               [::]:5353          [::]:*    users:(("avahi-daemon",pid=640,fd=13))                                                                                                                             
+udp   UNCONN 0      0               [::]:33280         [::]:*    users:(("avahi-daemon",pid=640,fd=15))                                                                                                                             
+tcp   LISTEN 0      128          0.0.0.0:2222       0.0.0.0:*    users:(("sshd",pid=1220,fd=6))                                                                                                                                     
+tcp   LISTEN 0      80         127.0.0.1:3306       0.0.0.0:*    users:(("mariadbd",pid=1316,fd=28))                                                                                                                                
+tcp   LISTEN 0      4096       127.0.0.1:631        0.0.0.0:*    users:(("cupsd",pid=3051,fd=7))                                                                                                                                    
+tcp   LISTEN 0      20         127.0.0.1:25         0.0.0.0:*    users:(("exim4",pid=1743,fd=5))                                                                                                                                    
+tcp   LISTEN 0      4096           [::1]:631           [::]:*    users:(("cupsd",pid=3051,fd=6))                                                                                                                                    
+tcp   LISTEN 0      20             [::1]:25            [::]:*    users:(("exim4",pid=1743,fd=6))                                                                                                                                    
+tcp   LISTEN 0      128             [::]:2222          [::]:*    users:(("sshd",pid=1220,fd=7))                                                                                                                                     
+tcp   LISTEN 0      511                *:80               *:*    users:(("apache2",pid=3042,fd=4),("apache2",pid=3041,fd=4),("apache2",pid=3040,fd=4),("apache2",pid=3039,fd=4),("apache2",pid=3038,fd=4),("apache2",pid=1322,fd=4))
+tcp   LISTEN 0      511                *:443              *:*    users:(("apache2",pid=3042,fd=6),("apache2",pid=3041,fd=6),("apache2",pid=3040,fd=6),("apache2",pid=3039,fd=6),("apache2",pid=3038,fd=6),("apache2",pid=1322,fd=6))
+
+=== 4. Interfaces de Rede e Endereços IP (ip a) ===
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:07:ef:03 brd ff:ff:ff:ff:ff:ff
+    altname enx08002707ef03
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:6b:88:ae brd ff:ff:ff:ff:ff:ff
+    altname enx0800276b88ae
+    inet 10.0.3.15/24 brd 10.0.3.255 scope global dynamic noprefixroute enp0s8
+       valid_lft 79463sec preferred_lft 79463sec
+    inet6 fe80::a00:27ff:fe6b:88ae/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
