@@ -6,7 +6,7 @@ from datetime import datetime
 
 DIR_DOCUMENTOS = 'documentos'
 ARQUIVO_ESTADO = 'documentos/estado_hashes.json'
-ARQUIVO_CHAIN_AUDITORIA = "auditoria/relatorios/auditoria_chain.json"
+ARQUIVO_CHAIN_AUDITORIA = "blockchain/chain.json"
 
 def calcular_hash_bloco(bloco):
     """Calcula o hash SHA-256 de um bloco transformado em string."""
