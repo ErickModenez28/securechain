@@ -1,0 +1,12 @@
+{
+    "admin_master": {
+        "hash": "ab23ef0c52ea97a8c935494236da2ad28313e73d6bdb5a4823b626b2776fcedb",
+        "salt": "dd61a4cc82b740dfba0bf660e7345c2f",
+        "perfil": "administrador"
+    },
+    "visitante01": {
+        "hash": "c16aa005d2c31ac87f0d466082450b10529cfc9500bc806b76f4246f79f2d191",
+        "salt": "26570634c0e44d96b2aa5aa987814423",
+        "perfil": "visitante"
+    }
+}
