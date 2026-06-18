@@ -78,3 +78,41 @@ Através do arquivo `auditoria/auditor.py`, automatizamos a execução de comand
 * **Usuários Ativos:** Usamos o `who` para saber quem está logado no momento e o `last` para puxar o histórico recente de acessos.
 * **Rede e Portas:** Disparamos o `ss -tulpn` para ver quais portas e serviços estão abertos, e o `ip a` para verificar os endereços IP e as interfaces de rede.
 * **Evidências:** Os dados processados são exportados automaticamente para relatórios datados em formato `.txt` na pasta `auditoria/relatorios/`. Isso permite que o usuário `visitante` valide o status de conformidade sem expor dados internos sensíveis e sem ter permissão para digitar os comandos diretamente no terminal.
+
+## 7. Validação da Integridade da Blockchain (RF07)
+Para fechar o ciclo de segurança e provar que ninguém adulterou os nossos próprios logs, desenvolvemos o script `blockchain/blockchain.py`. Ele serve para auditar a própria ferramenta de auditoria.
+
+### 7.1. Auditoria Contínua
+Quando o script é executado, ele percorre toda a cadeia do arquivo `chain.json`, recalculando os blocos matematicamente do zero para validar se:
+1. **Adulteração Direta:** Ocorreu alguma mudança nos dados (o hash recalculado na hora é diferente do `hash_atual` armazenado).
+2. **Quebra de Encadeamento:** Alguém tentou inserir ou remover um bloco inteiro (o `hash_anterior` de um bloco não reflete a assinatura do bloco passado).
+
+Se qualquer uma dessas regras for quebrada, o sistema acusa fraude imediatamente, indicando qual bloco exato foi corrompido.
+
+---
+
+## 8. Princípios de Segurança Aplicados
+
+### 8.1. Zero Trust Security
+Aplicamos o conceito de "Confiança Zero" em todas as camadas do projeto. Respondendo às exigências da avaliação:
+
+**1. Como o sistema verifica a identidade dos usuários em cada acesso?**
+Através do script `auth.py`, que exige as credenciais a cada execução. A identidade é verificada calculando o hash SHA-256 da senha fornecida somada ao *salt* específico daquele usuário, comparando o resultado com a base de dados criptografada.
+
+**2. Como as permissões são controladas e auditadas?**
+São controladas no nível do Sistema Operacional usando `chown` e `chmod`, garantindo isolamento total de pastas (RF01). São auditadas através da nossa Blockchain (RF04), que registra de forma permanente quem fez login, quando fez, e quais tentativas falhas ocorreram.
+
+**3. Como o princípio do menor privilégio foi aplicado na prática?**
+Configurando o usuário `visitante` apenas com permissão de travessia (`--x`) no diretório raiz e permissão de leitura exclusiva na pasta de relatórios. Ele não possui acesso de escrita, nem consegue ler o código-fonte principal ou os documentos.
+
+**4. Como as ações dos usuários são registradas de forma imutável?**
+Através do encadeamento criptográfico da nossa Blockchain. Qualquer tentativa de editar um log passado no arquivo JSON fará com que a matemática do hash SHA-256 mude, quebrando o `hash_anterior` do bloco seguinte e disparando os alertas do nosso script de validação (RF07).
+
+### 8.2. Engenharia de Software Segura (Mitigações)
+
+| Falha / Vulnerabilidade | Como foi mitigada no projeto |
+| :--- | :--- |
+| **Senhas em texto puro** | Implementação de Hash SHA-256 com *Salt* individual aleatório na base de dados (`usuarios/dados.json`). |
+| **Permissões excessivas de arquivos/diretórios** | Aplicação estrita de `chmod 750` e separação rigorosa de donos e grupos (`administrador`, `analista`, `visitante`). |
+| **Ausência de logs de eventos** | Criação de uma Blockchain local que atua como registro descentralizado e imutável de eventos críticos do sistema. |
+| **Ausência de validação de entrada** | O perfil do usuário durante o cadastro é validado contra uma lista estrita (`PERFIS_PERMITIDOS`), impedindo a injeção indevida de privilégios. |
