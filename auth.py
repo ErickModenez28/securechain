@@ -2,18 +2,22 @@ import json
 import os
 import hashlib
 import uuid
+import subprocess
 from datetime import datetime
+import getpass
 
 ARQUIVO_USUARIOS = 'usuarios/dados.json'
 ARQUIVO_CHAIN = 'blockchain/chain.json'
 PERFIS_PERMITIDOS = ['administrador', 'analista', 'visitante']
 
 def calcular_hash_bloco(bloco):
-    bloco_string = json.dumps(bloco, sort_keys=True).encode()
+    bloco_copia = bloco.copy()
+    if 'hash_atual' in bloco_copia:
+        del bloco_copia['hash_atual']
+    bloco_string = json.dumps(bloco_copia, sort_keys=True).encode()
     return hashlib.sha256(bloco_string).hexdigest()
 
 def registrar_blockchain(mensagem):
-    """Registra o evento de login/cadastro na Blockchain."""
     os.makedirs(os.path.dirname(ARQUIVO_CHAIN), exist_ok=True)
     chain = []
     if os.path.exists(ARQUIVO_CHAIN):
@@ -35,7 +39,6 @@ def registrar_blockchain(mensagem):
         json.dump(chain, f, indent=4)
 
 def gerar_hash_senha(senha, salt=None):
-    """Gera um hash SHA-256 com salt para a senha."""
     if salt is None:
         salt = uuid.uuid4().hex
     hash_senha = hashlib.sha256((salt + senha).encode()).hexdigest()
@@ -57,10 +60,56 @@ def cadastrar_usuario(username, senha, perfil):
         print(f"[ERRO] Perfil inválido. Escolha entre: {', '.join(PERFIS_PERMITIDOS)}")
         return
 
+    if len(senha) < 6:
+        print("[ERRO] A senha é muito curta. Use no mínimo 6 caracteres por segurança.")
+        return
+
     usuarios = carregar_usuarios()
     if username in usuarios:
-        print("[ERRO] Usuário já existe!")
+        print("[ERRO] Usuário já existe no banco de dados!")
         return
+
+    try:
+        resultado = subprocess.run(['id', username], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if resultado.returncode == 0:
+            print(f"[ERRO] O usuário '{username}' já existe no Linux!")
+            return
+    except Exception:
+        pass
+
+    # ================================================================
+    # INTEGRAÇÃO DE PERMISSÕES REAIS (RBAC) NO LINUX
+    # ================================================================
+    print(f"\n[*] Solicitando criação do usuário '{username}' ao Linux...")
+    try:
+        # Prepara o comando base
+        argumentos_useradd = ['useradd', '-m', '-s', '/bin/bash']
+        
+        # Mapeamento de Perfis para Grupos do Linux
+        if perfil == 'administrador':
+            argumentos_useradd.extend(['-G', 'sec_docs,sudo']) # Acesso aos docs + Poder de Root
+        elif perfil == 'analista':
+            argumentos_useradd.extend(['-G', 'sec_docs'])      # Acesso aos docs apenas
+        # Se for visitante, não adiciona flag -G (fica isolado)
+            
+        argumentos_useradd.append(username)
+        
+        # Dispara a criação no SO com os privilégios corretos
+        subprocess.run(argumentos_useradd, check=True, stderr=subprocess.DEVNULL)
+        
+        process = subprocess.Popen(['chpasswd'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        stdout, stderr = process.communicate(f"{username}:{senha}")
+        
+        if process.returncode != 0:
+            print(f"[ERRO CRÍTICO] O Linux recusou a senha definida: {stderr.strip()}")
+            subprocess.run(['userdel', '-r', username], stderr=subprocess.DEVNULL) 
+            return
+            
+        print(f"[*] Usuário '{username}' integrado ao SO com privilégios de '{perfil.upper()}'.")
+    except subprocess.CalledProcessError:
+        print(f"\n[ERRO CRÍTICO] Falha ao criar usuário. Rodou com 'sudo'?")
+        return
+    # ================================================================
 
     hash_senha, salt = gerar_hash_senha(senha)
     usuarios[username] = {
@@ -70,7 +119,7 @@ def cadastrar_usuario(username, senha, perfil):
     }
     salvar_usuarios(usuarios)
     
-    msg_audit = f"Usuário criado: {username} (Perfil: {perfil})"
+    msg_audit = f"Usuário REAL criado no SO com privilégios: {username} (Perfil: {perfil})"
     registrar_blockchain(msg_audit)
     print(f"[SUCESSO] {msg_audit}")
 
@@ -87,7 +136,7 @@ def login(username, senha):
     hash_calculado, _ = gerar_hash_senha(senha, dados_usuario["salt"])
 
     if hash_calculado == dados_usuario["hash"]:
-        msg_audit = f"Login realizado com sucesso: {username} (Perfil: {dados_usuario['perfil']})"
+        msg_audit = f"Login realizado no script: {username} (Perfil: {dados_usuario['perfil']})"
         registrar_blockchain(msg_audit)
         print(f"[ACESSO PERMITIDO] Bem-vindo, {username}! Perfil ativo: {dados_usuario['perfil']}")
         return True
@@ -98,14 +147,34 @@ def login(username, senha):
         return False
 
 if __name__ == "__main__":
-    print("--- SecureChain Audit: Módulo de Autenticação (RF02) ---")
-    
-    # Simulação automática para evidenciar o funcionamento para o professor
-    print("\n1. Cadastrando usuários de teste...")
-    cadastrar_usuario("admin_master", "SenhaSuperForte123", "administrador")
-    cadastrar_usuario("visitante01", "senha123", "visitante")
-    
-    print("\n2. Testando Logins...")
-    login("admin_master", "SenhaSuperForte123") # Deve funcionar
-    login("visitante01", "senha_errada")        # Deve falhar e registrar na blockchain
-    login("hacker", "123456")                   # Deve falhar e registrar na blockchain
+    while True:
+        print("\n" + "="*50)
+        print("🛡️  SECURECHAIN AUDIT - MÓDULO DE ACESSO")
+        print("="*50)
+        print("1. Fazer Login no Script")
+        print("2. Cadastrar Novo Usuário Real no Linux")
+        print("3. Sair")
+        print("="*50)
+        
+        opcao = input("Escolha uma opção: ")
+        
+        if opcao == '1':
+            print("\n--- TELA DE LOGIN ---")
+            user = input("Usuário: ")
+            senha = getpass.getpass("Senha: ")
+            login(user, senha)
+            
+        elif opcao == '2':
+            print("\n--- NOVO CADASTRO (REQUER SUDO) ---")
+            user = input("Novo Usuário: ")
+            senha = getpass.getpass("Senha: ")
+            print("Perfis disponíveis: administrador, analista, visitante")
+            perfil = input("Perfil escolhido: ").lower()
+            cadastrar_usuario(user, senha, perfil)
+            
+        elif opcao == '3':
+            print("\n[INFO] Encerrando Módulo de Acesso. Até logo!")
+            break
+            
+        else:
+            print("\n[ERRO] Opção inválida. Digite 1, 2 ou 3.")

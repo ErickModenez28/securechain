@@ -1,38 +1,50 @@
 [
     {
-        "timestamp": "2026-06-17T20:14:51.578680",
-        "evento": "[ALERTA CR\u00cdTICO] Arquivo ALTERADO: documentos/contrato_base.txt",
+        "timestamp": "2026-06-19T00:28:25.647039",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: teste (Perfil: administrador)",
         "hash_anterior": "0000000000000000000000000000000000000000000000000000000000000000",
-        "hash_atual": "460de9edb664c8bc6236882752ea0978dab818c982359fc723026a8b7ac98c7e"
+        "hash_atual": "0d31f88a12eaecfa88e2e6fc52882ed2e39836e21613ae6951056902ccac0f49"
     },
     {
-        "timestamp": "2026-06-17T20:46:51.749924",
-        "evento": "Usu\u00e1rio criado: admin_master (Perfil: administrador)",
-        "hash_anterior": "460de9edb664c8bc6236882752ea0978dab818c982359fc723026a8b7ac98c7e",
-        "hash_atual": "f7f6692d1bcdd30e55d7ae84b413651a501cd217e1daf479d7e67659f0993138"
+        "timestamp": "2026-06-19T00:34:35.078116",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: convidade (Perfil: visitante)",
+        "hash_anterior": "0d31f88a12eaecfa88e2e6fc52882ed2e39836e21613ae6951056902ccac0f49",
+        "hash_atual": "fcc7370e356bd51e00269d90f639075623396042f951b65439a2c6f47b97178b"
     },
     {
-        "timestamp": "2026-06-17T20:46:51.761515",
-        "evento": "Usu\u00e1rio criado: visitante01 (Perfil: visitante)",
-        "hash_anterior": "f7f6692d1bcdd30e55d7ae84b413651a501cd217e1daf479d7e67659f0993138",
-        "hash_atual": "906fadafea0ee50214f52cd8c6c88b02ed4a96c4292ae10ba0d8dd313d2c2723"
+        "timestamp": "2026-06-19T00:34:46.703273",
+        "evento": "Login realizado no script: convidade (Perfil: visitante)",
+        "hash_anterior": "fcc7370e356bd51e00269d90f639075623396042f951b65439a2c6f47b97178b",
+        "hash_atual": "921400a5c752dc3390ddc6c85892fc7f86b468db9e89adb6dd3054ff55072510"
     },
     {
-        "timestamp": "2026-06-17T20:46:51.766687",
-        "evento": "Login realizado com sucesso: admin_master (Perfil: administrador)",
-        "hash_anterior": "906fadafea0ee50214f52cd8c6c88b02ed4a96c4292ae10ba0d8dd313d2c2723",
-        "hash_atual": "7259cbf2d91f844b9b9be82c3cb73f8a6a9a860b4cb34652cade505f18c62cbf"
+        "timestamp": "2026-06-19T00:38:54.774747",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: analista (Perfil: analista)",
+        "hash_anterior": "921400a5c752dc3390ddc6c85892fc7f86b468db9e89adb6dd3054ff55072510",
+        "hash_atual": "651bef9c709569a44588ca0d8c985a14b335fa058c3c3655c09ac8afbdb8c5bb"
     },
     {
-        "timestamp": "2026-06-17T20:46:51.768346",
-        "evento": "Tentativa de acesso negada: senha incorreta para 'visitante01'",
-        "hash_anterior": "7259cbf2d91f844b9b9be82c3cb73f8a6a9a860b4cb34652cade505f18c62cbf",
-        "hash_atual": "1486c6dc88dda0cff9d569efeab1558daa7604945ed5beaafbb1031e14b26595"
+        "timestamp": "2026-06-19T00:39:00.732661",
+        "evento": "Login realizado no script: analista (Perfil: analista)",
+        "hash_anterior": "651bef9c709569a44588ca0d8c985a14b335fa058c3c3655c09ac8afbdb8c5bb",
+        "hash_atual": "6595dcdfe5bebd7f4551b651e6a1f9a2deca7d348c0afc30adaa49d927678303"
     },
     {
-        "timestamp": "2026-06-17T20:46:51.772731",
-        "evento": "Tentativa de acesso negada: usu\u00e1rio 'hacker' inexistente",
-        "hash_anterior": "1486c6dc88dda0cff9d569efeab1558daa7604945ed5beaafbb1031e14b26595",
-        "hash_atual": "804ceb591e7df1c7bf0ebc74752dfec7edef8c0b8f40c6e94e46a6dfa46e1379"
+        "timestamp": "2026-06-19T00:59:00.842650",
+        "evento": "[ALERTA CR\u00cdTICO] Arquivo INCLU\u00cdDO: documentos/.contrato_base.txt.swp",
+        "hash_anterior": "6595dcdfe5bebd7f4551b651e6a1f9a2deca7d348c0afc30adaa49d927678303",
+        "hash_atual": "e752cbff26ec7652d03dbd8cfc0c3635f640c3542d7156a0aeb1c324256bf55b"
+    },
+    {
+        "timestamp": "2026-06-19T00:59:10.848408",
+        "evento": "[ALERTA CR\u00cdTICO] Arquivo ALTERADO: documentos/contrato_base.txt",
+        "hash_anterior": "e752cbff26ec7652d03dbd8cfc0c3635f640c3542d7156a0aeb1c324256bf55b",
+        "hash_atual": "0aab2717272b95c21d65ad58e18ac3708088f0ccf77796ce64cad99bdec98112"
+    },
+    {
+        "timestamp": "2026-06-19T00:59:10.853025",
+        "evento": "[ALERTA CR\u00cdTICO] Arquivo EXCLU\u00cdDO: documentos/.contrato_base.txt.swp",
+        "hash_anterior": "0aab2717272b95c21d65ad58e18ac3708088f0ccf77796ce64cad99bdec98112",
+        "hash_atual": "b92cff59ed0010db7dce5cd5a89de641bca36c1b0caf5b74834f1a6083257ff0"
     }
 ]
