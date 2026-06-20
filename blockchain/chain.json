@@ -1,0 +1,8 @@
+[
+    {
+        "timestamp": "2026-06-20T14:11:06.979583",
+        "evento": "[ALERTA CR\u00cdTICO] Arquivo ALTERADO: documentos/contrato.txt",
+        "hash_anterior": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash_atual": "6347ced80f890f988bd02fd79187c4575bdfa3fcfb2dde78c51f3a1f1ee00d2e"
+    }
+]
