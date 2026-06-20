@@ -4,5 +4,131 @@
         "evento": "[ALERTA CR\u00cdTICO] Arquivo ALTERADO: documentos/contrato.txt",
         "hash_anterior": "0000000000000000000000000000000000000000000000000000000000000000",
         "hash_atual": "6347ced80f890f988bd02fd79187c4575bdfa3fcfb2dde78c51f3a1f1ee00d2e"
+    },
+    {
+        "timestamp": "2026-06-20T14:34:20.596546",
+        "evento": "Usu\u00e1rio criado: testeadmin (administrador)",
+        "hash_anterior": "6347ced80f890f988bd02fd79187c4575bdfa3fcfb2dde78c51f3a1f1ee00d2e",
+        "hash_atual": "e84120eef5c4bdbbba3b5d52f306bf3a71e997dc792bb7dc052f02c85bff2706"
+    },
+    {
+        "timestamp": "2026-06-20T14:41:18.638401",
+        "evento": "Usu\u00e1rio criado: testeadmin (administrador)",
+        "hash_anterior": "e84120eef5c4bdbbba3b5d52f306bf3a71e997dc792bb7dc052f02c85bff2706",
+        "hash_atual": "39f8e627172248d3cd591a0f1dfadfd4eef8f967145b95bd7059ec6b92b3a146"
+    },
+    {
+        "timestamp": "2026-06-20T14:50:43.713575",
+        "evento": "Usu\u00e1rio removido do sistema: testeadmin",
+        "hash_anterior": "39f8e627172248d3cd591a0f1dfadfd4eef8f967145b95bd7059ec6b92b3a146",
+        "hash_atual": "eb7d4469e1ea056289b7e6aec99ff98aa7c579d807913e852bfa184606381d72"
+    },
+    {
+        "timestamp": "2026-06-20T14:51:12.323285",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: testeadmin (Perfil: administrador)",
+        "hash_anterior": "eb7d4469e1ea056289b7e6aec99ff98aa7c579d807913e852bfa184606381d72",
+        "hash_atual": "f28f053660a8c379e3baac2270efbf3669dcae679c24708df9ab8c54bafdd435"
+    },
+    {
+        "timestamp": "2026-06-20T14:51:21.082987",
+        "evento": "Tentativa de acesso negada: senha incorreta para 'testeadmin'",
+        "hash_anterior": "f28f053660a8c379e3baac2270efbf3669dcae679c24708df9ab8c54bafdd435",
+        "hash_atual": "2b78413e7836739701fee7a0eb2f0212b9ccf9c38df8da9679d2b12c75b75d85"
+    },
+    {
+        "timestamp": "2026-06-20T14:51:28.746543",
+        "evento": "Login realizado no script e SO acessado: testeadmin (Perfil: administrador)",
+        "hash_anterior": "2b78413e7836739701fee7a0eb2f0212b9ccf9c38df8da9679d2b12c75b75d85",
+        "hash_atual": "75eb6a64c68a2bf248b081e4d192fcd51ac3801fee01325a6ce78dfcd49220f5"
+    },
+    {
+        "timestamp": "2026-06-20T14:55:02.990272",
+        "evento": "Usu\u00e1rio removido do sistema: testeadmin",
+        "hash_anterior": "75eb6a64c68a2bf248b081e4d192fcd51ac3801fee01325a6ce78dfcd49220f5",
+        "hash_atual": "e94e132747da38d6d956a21ef67e72400f8203f9eea17c8e7147c3f3c78cb760"
+    },
+    {
+        "timestamp": "2026-06-20T14:55:19.400688",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: testeadmin (Perfil: administrador)",
+        "hash_anterior": "e94e132747da38d6d956a21ef67e72400f8203f9eea17c8e7147c3f3c78cb760",
+        "hash_atual": "bb25276cfaf8d012a30ac986f1456f9d9a57af6a8401fd53b4de866e8f4c5420"
+    },
+    {
+        "timestamp": "2026-06-20T14:55:26.927564",
+        "evento": "Login realizado no script e SO acessado: testeadmin (Perfil: administrador)",
+        "hash_anterior": "bb25276cfaf8d012a30ac986f1456f9d9a57af6a8401fd53b4de866e8f4c5420",
+        "hash_atual": "38dd67fe6dbb049e3517bb78643c39372239e870a2f215d5a74347b93ae6e313"
+    },
+    {
+        "timestamp": "2026-06-20T14:56:42.995806",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: testeanalista (Perfil: analista)",
+        "hash_anterior": "38dd67fe6dbb049e3517bb78643c39372239e870a2f215d5a74347b93ae6e313",
+        "hash_atual": "da62e3b3fef87f5f5d3eade11909bb27b9ae1284b6ca72c65f239505602dd129"
+    },
+    {
+        "timestamp": "2026-06-20T14:56:49.930937",
+        "evento": "Login realizado no script e SO acessado: testeanalista (Perfil: analista)",
+        "hash_anterior": "da62e3b3fef87f5f5d3eade11909bb27b9ae1284b6ca72c65f239505602dd129",
+        "hash_atual": "e41b8b13582b77c68fe1e2191ff045eec528fd900d43850b4f0ed06b64bade41"
+    },
+    {
+        "timestamp": "2026-06-20T14:58:53.731343",
+        "evento": "Login realizado no script e SO acessado: testeanalista (Perfil: analista)",
+        "hash_anterior": "e41b8b13582b77c68fe1e2191ff045eec528fd900d43850b4f0ed06b64bade41",
+        "hash_atual": "8ca1379bd240af266fe6ea8cc89de1934f6bf63103dfc83c149b7b80dd8d6ed3"
+    },
+    {
+        "timestamp": "2026-06-20T15:49:18.832754",
+        "evento": "Usu\u00e1rio removido do sistema: testeadmin",
+        "hash_anterior": "8ca1379bd240af266fe6ea8cc89de1934f6bf63103dfc83c149b7b80dd8d6ed3",
+        "hash_atual": "242151468df2d5948636823cdf19c7abbdfd7989d1a04339d81649d01e886ce7"
+    },
+    {
+        "timestamp": "2026-06-20T15:49:26.574594",
+        "evento": "Usu\u00e1rio removido do sistema: testeanalista",
+        "hash_anterior": "242151468df2d5948636823cdf19c7abbdfd7989d1a04339d81649d01e886ce7",
+        "hash_atual": "acbdedca330eb10a219ea855ed5d100b4073ba8607c53b6b01271b83f87e6902"
+    },
+    {
+        "timestamp": "2026-06-20T15:50:26.494787",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: testeadmin (Perfil: administrador)",
+        "hash_anterior": "acbdedca330eb10a219ea855ed5d100b4073ba8607c53b6b01271b83f87e6902",
+        "hash_atual": "f2e2b0bbf1624a8206d4b13bc9d3ab4ccb2d9cbdc40e96edaf62742303ef54c7"
+    },
+    {
+        "timestamp": "2026-06-20T15:50:39.787039",
+        "evento": "Usu\u00e1rio REAL criado no SO com privil\u00e9gios: testevisita (Perfil: visitante)",
+        "hash_anterior": "f2e2b0bbf1624a8206d4b13bc9d3ab4ccb2d9cbdc40e96edaf62742303ef54c7",
+        "hash_atual": "bbff434e0d33924c30032e2c878dcbf8d277d685c2ec77544098027a3fda05db"
+    },
+    {
+        "timestamp": "2026-06-20T15:51:30.465018",
+        "evento": "Login realizado no script e SO acessado: testeadmin (Perfil: administrador)",
+        "hash_anterior": "bbff434e0d33924c30032e2c878dcbf8d277d685c2ec77544098027a3fda05db",
+        "hash_atual": "60f3f817ea9e76b78e4c53921553e015a2dc431f36e61844e0eaf0ffbf3cc613"
+    },
+    {
+        "timestamp": "2026-06-20T15:52:22.399303",
+        "evento": "[ALERTA CR\u00cdTICO] Arquivo ALTERADO: documentos/contrato.txt",
+        "hash_anterior": "60f3f817ea9e76b78e4c53921553e015a2dc431f36e61844e0eaf0ffbf3cc613",
+        "hash_atual": "8dc956991ecda45d2220392ee6db8c12c0e3103ac11865baf8e49ad22c52d489"
+    },
+    {
+        "timestamp": "2026-06-20T15:54:01.663063",
+        "evento": "Usu\u00e1rio removido do sistema: testeadmin",
+        "hash_anterior": "8dc956991ecda45d2220392ee6db8c12c0e3103ac11865baf8e49ad22c52d489",
+        "hash_atual": "35b6d896d675965d75568d8c670bf8260d48c19d768b5d0d2748d0d39e5fba39"
+    },
+    {
+        "timestamp": "2026-06-20T15:54:26.320417",
+        "evento": "Tentativa de acesso negada: usu\u00e1rio 'testevisitante' inexistente",
+        "hash_anterior": "35b6d896d675965d75568d8c670bf8260d48c19d768b5d0d2748d0d39e5fba39",
+        "hash_atual": "c46ea144dbd0d49a0cf474b4344d242aa902a9adc2755a31f12e2616187c9607"
+    },
+    {
+        "timestamp": "2026-06-20T15:54:38.951791",
+        "evento": "Login realizado no script e SO acessado: testevisita (Perfil: visitante)",
+        "hash_anterior": "c46ea144dbd0d49a0cf474b4344d242aa902a9adc2755a31f12e2616187c9607",
+        "hash_atual": "d023bc3ea408c940541d8922ba646e77d6aedbc1b17694546917ea99a3157592"
     }
 ]

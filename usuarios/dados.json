@@ -1,1 +1,7 @@
-{}
+{
+    "testevisita": {
+        "hash": "bb7a99a64b0f9d3b85a34a8666cc10a100e2e6181f0b4a49cd802b76a13c726d",
+        "salt": "8ad6d11759a949ab9023977ed5cb53f7",
+        "perfil": "visitante"
+    }
+}
