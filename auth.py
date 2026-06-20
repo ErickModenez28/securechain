@@ -123,6 +123,29 @@ def cadastrar_usuario(username, senha, perfil):
     registrar_blockchain(msg_audit)
     print(f"[SUCESSO] {msg_audit}")
 
+def remover_usuario(username):
+    usuarios = carregar_usuarios()
+    
+    if username not in usuarios:
+        print(f"[ERRO] O usuário '{username}' não existe no banco de dados do sistema.")
+        return
+
+    print(f"\n[*] Solicitando remoção do usuário '{username}' ao Linux...")
+    try:
+        # Remove o usuário e o diretório home (-r) no SO
+        subprocess.run(['userdel', '-r', username], check=True, stderr=subprocess.DEVNULL)
+        print(f"[*] Usuário '{username}' removido do SO com sucesso.")
+    except subprocess.CalledProcessError:
+        print(f"[AVISO] O usuário '{username}' não foi encontrado no SO ou ocorreu um erro de permissão. Certifique-se de usar sudo.")
+
+    # Remove do banco de dados local
+    del usuarios[username]
+    salvar_usuarios(usuarios)
+    
+    msg_audit = f"Usuário removido do sistema: {username}"
+    registrar_blockchain(msg_audit)
+    print(f"[SUCESSO] {msg_audit}")
+
 def login(username, senha):
     usuarios = carregar_usuarios()
     
@@ -136,9 +159,19 @@ def login(username, senha):
     hash_calculado, _ = gerar_hash_senha(senha, dados_usuario["salt"])
 
     if hash_calculado == dados_usuario["hash"]:
-        msg_audit = f"Login realizado no script: {username} (Perfil: {dados_usuario['perfil']})"
+        msg_audit = f"Login realizado no script e SO acessado: {username} (Perfil: {dados_usuario['perfil']})"
         registrar_blockchain(msg_audit)
-        print(f"[ACESSO PERMITIDO] Bem-vindo, {username}! Perfil ativo: {dados_usuario['perfil']}")
+        print(f"\n[ACESSO PERMITIDO] Bem-vindo, {username}! Perfil ativo: {dados_usuario['perfil']}")
+        
+        # Inicia a sessão real no Sistema Operacional
+        print(f"[*] Abrindo terminal seguro para {username}... (Digite 'exit' para encerrar a sessão e voltar ao menu)")
+        try:
+            # O subprocesso chama o 'su -' que abre o shell com as variáveis de ambiente do usuário logado
+            subprocess.run(['su', '-', username])
+        except Exception as e:
+            print(f"[ERRO] Falha ao iniciar a sessão no SO: {e}")
+            
+        print(f"\n[*] Sessão de {username} encerrada. Retornando ao menu do SecureChain Audit.")
         return True
     else:
         msg_audit = f"Tentativa de acesso negada: senha incorreta para '{username}'"
@@ -147,13 +180,17 @@ def login(username, senha):
         return False
 
 if __name__ == "__main__":
+    # Garante que o arquivo de usuários foi modificado no topo para 'usuarios/dado.json' conforme validado no relatório.
+    os.makedirs('usuarios', exist_ok=True)
+    
     while True:
         print("\n" + "="*50)
         print("🛡️  SECURECHAIN AUDIT - MÓDULO DE ACESSO")
         print("="*50)
-        print("1. Fazer Login no Script")
-        print("2. Cadastrar Novo Usuário Real no Linux")
-        print("3. Sair")
+        print("1. Fazer Login")
+        print("2. Cadastrar Novo Usuário")
+        print("3. Remover Usuário")
+        print("4. Sair")
         print("="*50)
         
         opcao = input("Escolha uma opção: ")
@@ -173,8 +210,17 @@ if __name__ == "__main__":
             cadastrar_usuario(user, senha, perfil)
             
         elif opcao == '3':
+            print("\n--- REMOVER USUÁRIO (REQUER SUDO) ---")
+            user = input("Digite o nome do usuário que deseja excluir: ")
+            confirmacao = input(f"Tem certeza que deseja apagar '{user}' permanentemente? (s/n): ").lower()
+            if confirmacao == 's':
+                remover_usuario(user)
+            else:
+                print("[INFO] Operação cancelada.")
+                
+        elif opcao == '4':
             print("\n[INFO] Encerrando Módulo de Acesso. Até logo!")
             break
             
         else:
-            print("\n[ERRO] Opção inválida. Digite 1, 2 ou 3.")
+            print("\n[ERRO] Opção inválida. Digite 1, 2, 3 ou 4.")

@@ -1,17 +1,1 @@
-{
-    "teste": {
-        "hash": "c7cf80ec55ba03a74379f81eadcb2f61dc14b2f9d225e818dbd9a348c4150b9a",
-        "salt": "c6688ec8130343e69655884ac84f9d72",
-        "perfil": "administrador"
-    },
-    "convidade": {
-        "hash": "4dce5014a219ed94cfa169c5a6ecc3af7cb20f889ef0f9b882374060f84ad77d",
-        "salt": "24b1047b553a4c1d92dc6aa9f9207078",
-        "perfil": "visitante"
-    },
-    "analista": {
-        "hash": "7492864a1db170ffe4ac029c667c07260447c6e86798155e9699414079f9af70",
-        "salt": "e10d503dd3ef4664b48abed20f94d64d",
-        "perfil": "analista"
-    }
-}
+{}
